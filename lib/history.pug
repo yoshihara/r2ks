@@ -13,15 +13,14 @@ html
       }
       body {
         background: rgb(204,204,204);
-        font-size: 10px;
-        font-size: 1rem;
+        font-size: 12px;
       }
       page {
         background: white;
         display: block;
         margin: 0 auto;
         margin-bottom: 0.5cm;
-        box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+        box-shadow: 0;
       }
       page[size="A3"][layout="portrait"] {
         width: 1260px;
@@ -103,7 +102,7 @@ html
             td
             td
             td
-            td(style="text-align:right;") #{locals.data.now}
+            td(style="text-align:right; font-size: 0.8rem;") #{locals.data.now}
             td
             td
             td
@@ -111,17 +110,49 @@ html
 
           tr(style="height:33.5px;")
             td.bd-t-s.bd-l-s フリガナ
-            td.bd-t-s.bd-l-s(colspan="3") #{locals.data.kanaName}
+            td.bd-t-s(colspan="3") #{locals.data.kanaName}
             td.bd-t-s.bd-l-dt.center(rowspan="3") #{locals.data.gender}
             td.bd-t-s.bd-r-s.bd-l-s.center(rowspan="4") （写真を貼る位置）
+            td
+            if locals.data.careerHistory[2]
+              td.bd-t-s.bd-l-s.center #{locals.data.careerHistory[2].year}
+              td.bd-t-s.bd-l-dt.center #{locals.data.careerHistory[2].month}
+              td.bd-t-s.bd-r-s.bd-l-dt(colspan="4") #{locals.data.careerHistory[2].value}
+            else
+              td.bd-t-dt.bd-l-s.center
+              td.bd-t-dt.bd-l-dt.center
+              td.bd-t-dt.bd-r-s.bd-l-dt(colspan="4")
+
+          tr(style="height:33.5px;")
+            td.bd-t-dt.bd-l-s(rowspan="2") 氏 名
+            td.bd-t-dt(colspan="3", rowspan="2", style="font-size: 2em;") #{locals.data.fullName}
+            td
+            if locals.data.careerHistory[3]
+              td.bd-t-dt.bd-l-s.center #{locals.data.careerHistory[3].year}
+              td.bd-t-dt.bd-l-dt.center #{locals.data.careerHistory[3].month}
+              td.bd-t-dt.bd-r-s.bd-l-dt(colspan="4") #{locals.data.careerHistory[3].value}
+            else
+              td.bd-t-dt.bd-l-s.center
+              td.bd-t-dt.bd-l-dt.center
+              td.bd-t-dt.bd-r-s.bd-l-dt(colspan="4")
+
+          tr(style="height:33.5px;")
+            td
+            td.bd-t-dt.bd-b-s.bd-l-s.center
+            td.bd-t-dt.bd-b-s.bd-l-dt.center
+            td.bd-t-dt.bd-r-s.bd-b-s.bd-l-dt(colspan="4") 現在に至る
+
+          tr(style="height:33.5px;")
+            td.bd-t-s.bd-l-s 生年月日
+            td.bd-t-s(colspan="4") #{locals.data.birth}
             td
             td.bd-t-s.bd-l-s.center 年
             td.bd-t-s.bd-l-dt.center 月
             td.bd-t-s.bd-r-s.bd-l-dt.center 賞罰
 
           tr(style="height:33.5px;")
-            td.bd-t-dt.bd-l-s(rowspan="2") 氏 名
-            td.bd-t-dt(colspan="3", rowspan="2") #{locals.data.fullName}
+            td.bd-t-s.bd-l-s フリガナ
+            td.bd-t-s.bd-r-s(colspan="5") #{locals.data.kanaAddress}
             td
             if locals.data.reward[0]
               td.bd-t-db.bd-l-s.center #{locals.data.reward[0].year}
@@ -133,6 +164,8 @@ html
               td.bd-t-db.bd-r-s.bd-l-dt.center
 
           tr(style="height:33.5px;")
+            td.bd-t-dt.bd-l-s 住 所
+            td.bd-t-dt.bd-r-s(colspan="5") ( 〒 #{locals.data.postCode} )
             td
             if locals.data.reward[1]
               td.bd-t-dt.bd-l-s.center #{locals.data.reward[1].year}
@@ -144,51 +177,13 @@ html
               td.bd-t-dt.bd-r-s.bd-l-dt.center
 
           tr(style="height:33.5px;")
-            td.bd-t-s.bd-l-s 生年月日
-            td.bd-t-s.bd-l-s(colspan="4") #{locals.data.birth}
+            td.bd-l-s(rowspan="2")
+            td.bd-r-s(colspan="5", rowspan="2") #{locals.data.address}
             td
             if locals.data.reward[2]
               td.bd-t-dt.bd-l-s.center #{locals.data.reward[2].year}
               td.bd-t-dt.bd-l-dt.center #{locals.data.reward[2].month}
               td.bd-t-dt.bd-r-s.bd-l-dt.center #{locals.data.reward[2].value}
-            else
-              td.bd-t-dt.bd-l-s.center
-              td.bd-t-dt.bd-l-dt.center
-              td.bd-t-dt.bd-r-s.bd-l-dt.center
-
-          tr(style="height:33.5px;")
-            td.bd-t-s.bd-l-s フリガナ
-            td.bd-t-s.bd-r-s.bd-l-s(colspan="5") #{locals.data.kanaAddress}
-            td
-            if locals.data.reward[3]
-              td.bd-t-dt.bd-l-s.center #{locals.data.reward[3].year}
-              td.bd-t-dt.bd-l-dt.center #{locals.data.reward[3].month}
-              td.bd-t-dt.bd-r-s.bd-l-dt.center #{locals.data.reward[3].value}
-            else
-              td.bd-t-dt.bd-l-s.center
-              td.bd-t-dt.bd-l-dt.center
-              td.bd-t-dt.bd-r-s.bd-l-dt.center
-
-          tr(style="height:33.5px;")
-            td.bd-t-dt.bd-l-s 住 所
-            td.bd-t-dt.bd-r-s(colspan="5") ( 〒 #{locals.data.postCode} )
-            td
-            if locals.data.reward[3]
-              td.bd-t-dt.bd-l-s.center #{locals.data.reward[3].year}
-              td.bd-t-dt.bd-l-dt.center #{locals.data.reward[3].month}
-              td.bd-t-dt.bd-r-s.bd-l-dt.center #{locals.data.reward[3].value}
-            else
-              td.bd-t-dt.bd-l-s.center
-              td.bd-t-dt.bd-l-dt.center
-              td.bd-t-dt.bd-r-s.bd-l-dt.center
-
-          tr(style="height:33.5px;")
-            td.bd-r-s.bd-l-s(colspan="6", rowspan="2") #{locals.data.address}
-            td
-            if locals.data.reward[4]
-              td.bd-t-dt.bd-l-s.center #{locals.data.reward[4].year}
-              td.bd-t-dt.bd-l-dt.center #{locals.data.reward[4].month}
-              td.bd-t-dt.bd-r-s.bd-l-dt.center #{locals.data.reward[4].value}
             else
               td.bd-t-dt.bd-l-s.center
               td.bd-t-dt.bd-l-dt.center
@@ -206,10 +201,10 @@ html
             td.bd-t-s.bd-l-s 携帯電話
             td.bd-t-s.bd-r-s(colspan="2") #{locals.data.mobile}
             td
-            if locals.data.reward[5]
-              td.bd-t-dt.bd-l-s.center #{locals.data.reward[5].year}
-              td.bd-t-dt.bd-l-dt.center #{locals.data.reward[5].month}
-              td.bd-t-dt.bd-r-s.bd-l-dt.center #{locals.data.reward[5].value}
+            if locals.data.reward[2]
+              td.bd-t-dt.bd-l-s.center #{locals.data.reward[2].year}
+              td.bd-t-dt.bd-l-dt.center #{locals.data.reward[2].month}
+              td.bd-t-dt.bd-r-s.bd-l-dt.center #{locals.data.reward[2].value}
             else
               td.bd-t-dt.bd-l-s.center
               td.bd-t-dt.bd-l-dt.center
@@ -328,9 +323,14 @@ html
               td.bd-t-dt.bd-r-s.bd-l-dt
 
           tr(style="height:33.5px;")
-            td.bd-t-dt.bd-l-s.center
-            td.bd-t-dt.bd-l-dt.center
-            td.bd-t-dt.bd-r-s.bd-l-dt.center(colspan="4")
+            if locals.data.academicBackground[4]
+              td.bd-t-dt.bd-l-s.center #{locals.data.academicBackground[4].year}
+              td.bd-t-dt.bd-l-dt.center #{locals.data.academicBackground[4].month}
+              td.bd-t-dt.bd-r-s.bd-l-dt(colspan="4") #{locals.data.academicBackground[4].value}
+            else
+              td.bd-t-dt.bd-l-s.center
+              td.bd-t-dt.bd-l-dt.center
+              td.bd-t-dt.bd-r-s.bd-l-dt(colspan="4")
             td
             if locals.data.license[6]
               td.bd-t-dt.bd-l-s.center #{locals.data.license[6].year}
@@ -342,9 +342,14 @@ html
               td.bd-t-dt.bd-r-s.bd-l-dt
 
           tr(style="height:33.5px;")
-            td.bd-t-dt.bd-l-s.center
-            td.bd-t-dt.bd-l-dt.center
-            td.bd-t-dt.bd-r-s.bd-l-dt.center(colspan="4") 職歴
+            if locals.data.academicBackground[5]
+              td.bd-t-dt.bd-l-s.center #{locals.data.academicBackground[5].year}
+              td.bd-t-dt.bd-l-dt.center #{locals.data.academicBackground[5].month}
+              td.bd-t-dt.bd-r-s.bd-l-dt(colspan="4") #{locals.data.academicBackground[5].value}
+            else
+              td.bd-t-dt.bd-l-s.center
+              td.bd-t-dt.bd-l-dt.center
+              td.bd-t-dt.bd-r-s.bd-l-dt
             td
             if locals.data.license[7]
               td.bd-t-dt.bd-l-s.center #{locals.data.license[7].year}
@@ -356,6 +361,25 @@ html
               td.bd-t-dt.bd-r-s.bd-l-dt
 
           tr(style="height:33.5px;")
+            if locals.data.academicBackground[6]
+              td.bd-t-dt.bd-l-s.center #{locals.data.academicBackground[6].year}
+              td.bd-t-dt.bd-l-dt.center #{locals.data.academicBackground[6].month}
+              td.bd-t-dt.bd-r-s.bd-l-dt(colspan="4") #{locals.data.academicBackground[6].value}
+            else
+              td.bd-t-dt.bd-l-s.center
+              td.bd-t-dt.bd-l-dt.center
+              td.bd-t-dt.bd-r-s.bd-l-dt(colspan="4")
+            td
+            td.bd-t-s.bd-r-s.bd-l-s(colspan="3") 本人希望記入欄
+
+          tr(style="height:33.5px;")
+            td.bd-t-dt.bd-l-s.center
+            td.bd-t-dt.bd-l-dt.center
+            td.bd-t-dt.bd-r-s.bd-l-dt.center(colspan="4") 職歴
+            td
+            td.bd-t-dt.bd-r-s.bd-b-s.bd-l-s(colspan="3", rowspan="3") #{locals.data.note}
+
+          tr(style="height:33.5px;")
             if locals.data.careerHistory[0]
               td.bd-t-dt.bd-l-s.center #{locals.data.careerHistory[0].year}
               td.bd-t-dt.bd-l-dt.center #{locals.data.careerHistory[0].month}
@@ -365,33 +389,14 @@ html
               td.bd-t-dt.bd-l-dt.center
               td.bd-t-dt.bd-r-s.bd-l-dt(colspan="4")
             td
-            td.bd-t-s.bd-r-s.bd-l-s(colspan="3") 本人希望記入欄
 
           tr(style="height:33.5px;")
             if locals.data.careerHistory[1]
-              td.bd-t-dt.bd-l-s.center #{locals.data.careerHistory[1].year}
-              td.bd-t-dt.bd-l-dt.center #{locals.data.careerHistory[1].month}
-              td.bd-t-dt.bd-r-s.bd-l-dt(colspan="4") #{locals.data.careerHistory[1].value}
+              td.bd-t-dt.bd-b-s.bd-l-s.center #{locals.data.careerHistory[1].year}
+              td.bd-t-dt.bd-b-s.bd-l-dt.center #{locals.data.careerHistory[1].month}
+              td.bd-t-dt.bd-r-s.bd-b-s.bd-l-dt(colspan="4") #{locals.data.careerHistory[1].value}
             else
               td.bd-t-dt.bd-l-s.center
               td.bd-t-dt.bd-l-dt.center
               td.bd-t-dt.bd-r-s.bd-l-dt(colspan="4")
-            td
-            td.bd-t-s.bd-r-s.bd-b-s.bd-l-s(colspan="3", rowspan="3") #{locals.data.note}
-
-          tr(style="height:33.5px;")
-            if locals.data.careerHistory[2]
-              td.bd-t-dt.bd-l-s.center #{locals.data.careerHistory[2].year}
-              td.bd-t-dt.bd-l-dt.center #{locals.data.careerHistory[2].month}
-              td.bd-t-dt.bd-r-s.bd-l-dt(colspan="4") #{locals.data.careerHistory[2].value}
-            else
-              td.bd-t-dt.bd-l-s.center
-              td.bd-t-dt.bd-l-dt.center
-              td.bd-t-dt.bd-r-s.bd-l-dt(colspan="4")
-            td
-
-          tr(style="height:33.5px;")
-            td.bd-t-dt.bd-b-s.bd-l-s.center
-            td.bd-t-dt.bd-b-s.bd-l-dt.center
-            td.bd-t-dt.bd-r-s.bd-b-s.bd-l-dt(colspan="4") 現在に至る
             td
