@@ -112,7 +112,11 @@ html
             td.bd-t-s.bd-l-s フリガナ
             td.bd-t-s(colspan="3") #{locals.data.kanaName}
             td.bd-t-s.bd-l-dt.center(rowspan="3") #{locals.data.gender}
-            td.bd-t-s.bd-r-s.bd-l-s.center(rowspan="4") （写真を貼る位置）
+            td.bd-t-s.bd-r-s.bd-l-s.center(rowspan="4" style="padding:3px 0 0 0;")
+              if locals.data.picture
+                img(src=locals.data.picture style="height:138px; width:118px;")
+              else
+                span （写真を貼る位置）
             td
             if locals.data.careerHistory[2]
               td.bd-t-s.bd-l-s.center #{locals.data.careerHistory[2].year}
